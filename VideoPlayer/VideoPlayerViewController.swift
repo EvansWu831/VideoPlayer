@@ -34,7 +34,7 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
         setUrlTextField()
         view.addSubview(urlTextField)
     }
-    //播放
+
     func setPlayer(url: String) {
         guard let url = URL(string: url) else {return}
         player = AVPlayer(url: url)
@@ -45,6 +45,13 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
         playerLayer.frame = playerView.bounds
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let url = urlTextField.text else { return true }
+        setPlayer(url: url)
+        self.view.endEditing(true)
+        return true
+    }
+    
     func setPlayerView() {
         playerView = UIView()
         playerView.backgroundColor = UIColor.clear
@@ -59,14 +66,17 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
 
     func setButton() {
         playButton = UIButton(type: UIButtonType.system)
-        playButton.frame = CGRect(x: 20, y: 13, width: 33, height: 19)
-        playButton.setTitle("Play", for: UIControlState.normal)
+        playButton.frame = CGRect(x: 20, y: 13, width: 45, height: 19)
+        playButton.setTitle("Pause", for: UIControlState.normal)
         playButton.setTitleColor(.white, for: UIControlState.normal)
+        playButton.addTarget(self, action: #selector(playOrPause(sender:)), for: UIControlEvents.touchUpInside)
         buttonView.addSubview(playButton)
+
         muteButton = UIButton(type: UIButtonType.system)
-        muteButton.frame = CGRect(x: 320, y: 13, width: 39, height: 19)
+        muteButton.frame = CGRect(x: 320, y: 13, width: 45, height: 19)
         muteButton.setTitle("Mute", for: UIControlState.normal)
         muteButton.setTitleColor(.white, for: UIControlState.normal)
+        muteButton.addTarget(self, action: #selector(mute(sender:)), for: UIControlEvents.touchUpInside)
         buttonView.addSubview(muteButton)
     }
 
@@ -81,11 +91,31 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
         urlTextField.textAlignment = .center
     }
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let url = urlTextField.text else { return true }
-        setPlayer(url: url)
-        self.view.endEditing(true)
-        return true
+    var videoPlaying = true
+
+    @objc func playOrPause(sender: UIButton) {
+        if videoPlaying == true {
+            player.pause()
+            sender.setTitle("Play", for: .normal)
+            videoPlaying = false
+        } else {
+            player.play()
+            sender.setTitle("Pause", for: .normal)
+            videoPlaying = true
+        }
     }
 
+    var videoIsMuted = false
+
+    @objc func mute(sender: UIButton) {
+        if videoIsMuted == true {
+            player.isMuted = false
+            sender.setTitle("Mute", for: .normal)
+            videoIsMuted = false
+        } else {
+            player.isMuted = true
+            sender.setTitle("Muted", for: .normal)
+            videoIsMuted = true
+        }
+    }
 }
