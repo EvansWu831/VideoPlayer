@@ -55,21 +55,28 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
+
         guard let truth = change?[NSKeyValueChangeKey.newKey] as? Bool else {return}
         if let observe = keyPath {
             if observe == "videoIsPlaying" {
                 if truth == true {
                     print("播放", "ON")
+                    playButton.setTitle("Pause", for: .normal)
                 } else {
                     print("播放", "OFF")
+                    playButton.setTitle("Play", for: .normal)
                 }
             } else {
                 if truth == true {
                     print("靜音", "ON")
+                    muteButton.setTitle("Sound", for: .normal)
                 } else {
                     print("靜音", "OFF")
+                    muteButton.setTitle("Mute", for: .normal)
                 }
             }
         } else {
@@ -121,11 +128,9 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
     @objc func pressedPlay(sender: UIButton) {
         if video.videoIsPlaying == true {
             player.pause()
-            sender.setTitle("Play", for: .normal)
             video.videoIsPlaying = false
         } else {
             player.play()
-            sender.setTitle("Pause", for: .normal)
             video.videoIsPlaying = true
         }
     }
@@ -133,11 +138,9 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
     @objc func pressedMute(sender: UIButton) {
         if video.videoIsMute == true {
             player.isMuted = false
-            sender.setTitle("Mute", for: .normal)
             video.videoIsMute = false
         } else {
             player.isMuted = true
-            sender.setTitle("Muted", for: .normal)
             video.videoIsMute = true
         }
     }
