@@ -55,8 +55,26 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        print("測試看看")
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard let truth = change?[NSKeyValueChangeKey.newKey] as? Bool else {return}
+        if let observe = keyPath {
+            if observe == "videoIsPlaying" {
+                if truth == true {
+                    print("播放", "ON")
+                } else {
+                    print("播放", "OFF")
+                }
+            } else {
+                if truth == true {
+                    print("靜音", "ON")
+                } else {
+                    print("靜音", "OFF")
+                }
+            }
+        } else {
+            print("keyPath出錯")
+        }
     }
 
     func setPlayerView() {
