@@ -11,7 +11,7 @@
 		2823715520EDE2790088245B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2823715420EDE2790088245B /* Assets.xcassets */; };
 		2823715820EDE2790088245B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2823715620EDE2790088245B /* LaunchScreen.storyboard */; };
 		2823716120EDE7070088245B /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2823716020EDE7070088245B /* VideoPlayerViewController.swift */; };
-		2823718520EE13350088245B /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2823718420EE13350088245B /* VideoPlayer.swift */; };
+		2823718B20EE18620088245B /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2823718A20EE18610088245B /* Video.swift */; };
 		41D79E3FE1E72FC04DBE5FC5 /* Pods_VideoPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22014CF80B5310EF3B4B9978 /* Pods_VideoPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,7 +23,7 @@
 		2823715720EDE2790088245B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2823715920EDE2790088245B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2823716020EDE7070088245B /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
-		2823718420EE13350088245B /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		2823718A20EE18610088245B /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		3F809CB5090AC35A9098E0D9 /* Pods-VideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VideoPlayer/Pods-VideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		EC37F59FA78310F0392D5758 /* Pods-VideoPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-VideoPlayer/Pods-VideoPlayer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +66,7 @@
 				2823715620EDE2790088245B /* LaunchScreen.storyboard */,
 				2823715920EDE2790088245B /* Info.plist */,
 				2823716020EDE7070088245B /* VideoPlayerViewController.swift */,
-				2823718420EE13350088245B /* VideoPlayer.swift */,
+				2823718A20EE18610088245B /* Video.swift */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -197,7 +197,7 @@
 			files = (
 				2823714E20EDE2710088245B /* AppDelegate.swift in Sources */,
 				2823716120EDE7070088245B /* VideoPlayerViewController.swift in Sources */,
-				2823718520EE13350088245B /* VideoPlayer.swift in Sources */,
+				2823718B20EE18620088245B /* Video.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

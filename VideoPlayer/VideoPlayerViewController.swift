@@ -33,6 +33,9 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
 
         setUrlTextField()
         view.addSubview(urlTextField)
+
+        video.addObserver(self, forKeyPath: "videoIsPlaying", options: .new, context: nil)
+        video.addObserver(self, forKeyPath: "videoIsMute", options: .new, context: nil)
     }
 
     func setPlayer(url: String) {
@@ -51,7 +54,11 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         return true
     }
-    
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        print("測試看看")
+    }
+
     func setPlayerView() {
         playerView = UIView()
         playerView.backgroundColor = UIColor.clear
@@ -69,14 +76,14 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
         playButton.frame = CGRect(x: 20, y: 13, width: 45, height: 19)
         playButton.setTitle("Pause", for: UIControlState.normal)
         playButton.setTitleColor(.white, for: UIControlState.normal)
-        playButton.addTarget(self, action: #selector(playOrPause(sender:)), for: UIControlEvents.touchUpInside)
+        playButton.addTarget(self, action: #selector(pressedPlay(sender:)), for: UIControlEvents.touchUpInside)
         buttonView.addSubview(playButton)
 
         muteButton = UIButton(type: UIButtonType.system)
         muteButton.frame = CGRect(x: 320, y: 13, width: 45, height: 19)
         muteButton.setTitle("Mute", for: UIControlState.normal)
         muteButton.setTitleColor(.white, for: UIControlState.normal)
-        muteButton.addTarget(self, action: #selector(mute(sender:)), for: UIControlEvents.touchUpInside)
+        muteButton.addTarget(self, action: #selector(pressedMute(sender:)), for: UIControlEvents.touchUpInside)
         buttonView.addSubview(muteButton)
     }
 
@@ -91,31 +98,29 @@ class VideoPlayerViewController: UIViewController, UITextFieldDelegate {
         urlTextField.textAlignment = .center
     }
 
-    var videoPlaying = true
+    let video = Video.init(videoIsPlaying: true, videoIsMute: false)
 
-    @objc func playOrPause(sender: UIButton) {
-        if videoPlaying == true {
+    @objc func pressedPlay(sender: UIButton) {
+        if video.videoIsPlaying == true {
             player.pause()
             sender.setTitle("Play", for: .normal)
-            videoPlaying = false
+            video.videoIsPlaying = false
         } else {
             player.play()
             sender.setTitle("Pause", for: .normal)
-            videoPlaying = true
+            video.videoIsPlaying = true
         }
     }
 
-    var videoIsMuted = false
-
-    @objc func mute(sender: UIButton) {
-        if videoIsMuted == true {
+    @objc func pressedMute(sender: UIButton) {
+        if video.videoIsMute == true {
             player.isMuted = false
             sender.setTitle("Mute", for: .normal)
-            videoIsMuted = false
+            video.videoIsMute = false
         } else {
             player.isMuted = true
             sender.setTitle("Muted", for: .normal)
-            videoIsMuted = true
+            video.videoIsMute = true
         }
     }
 }
