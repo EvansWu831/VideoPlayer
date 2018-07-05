@@ -8,12 +8,14 @@
 
 import Foundation
 import UIKit
+import AVKit
 
 class VideoPlayerViewController: UIViewController {
 
     var buttonView: UIView!
     var playButton: UIButton!
     var muteButton: UIButton!
+    var urlTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,9 @@ class VideoPlayerViewController: UIViewController {
         setButtonView()
         setButton()
         view.addSubview(buttonView)
+        
+        setUrlTextField()
+        view.addSubview(urlTextField)
     }
     func setButtonView() {
         buttonView = UIView()
@@ -39,5 +44,14 @@ class VideoPlayerViewController: UIViewController {
         muteButton.setTitle("Mute", for: UIControlState.normal)
         muteButton.setTitleColor(.white, for: UIControlState.normal)
         buttonView.addSubview(muteButton)
+    }
+    func setUrlTextField() {
+        urlTextField = UITextField()
+        urlTextField.frame = CGRect(x: 8, y: 27, width: 359, height: 30)
+        urlTextField.backgroundColor = UIColor.white
+        urlTextField.layer.masksToBounds = true
+        urlTextField.layer.cornerRadius = 5
+        urlTextField.placeholder = "🔍 Enter URL of video"
+        urlTextField.textAlignment = .center
     }
 }
